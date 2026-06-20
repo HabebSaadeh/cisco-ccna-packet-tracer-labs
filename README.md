@@ -22,6 +22,16 @@ To mimic practical, high-stability physical environments and eliminate software 
 * **[Lab 04: Classless Addressing & VLSM Design](./Part-1-Small-Office-LAN/lab-04-classless-vlsm-constraints.pkt)**
     * **Core Concepts:** Classless Inter-Domain Routing (CIDR), variable length subnetting (30-host maximum limits), and interpreting Connected (C) vs. Local (L) /32 routing table routes.
 
+### Part 2: Medium Enterprise Topologies
+* **[Lab 05: Multi-Router WAN Link Baseline](./Part-2-Medium-Enterprise/lab-05-dual-router-core.pkt)**
+    * **Core Concepts:** Point-to-point /30 serial-equivalent copper inter-router links and isolating standard cross-subnet reachability failures before routing convergence.
+* **[Lab 06: Next-Hop IPv4 Static Routing](./Part-2-Medium-Enterprise/lab-06-next-hop-static-routing.pkt)**
+    * **Core Concepts:** Next-hop IP static route mapping, recursive routing table lookups, and Administrative Distance (AD) / Metric evaluation.
+* **[Lab 07: Exit-Interface Static Routing & Proxy ARP](./Part-2-Medium-Enterprise/lab-07-exit-interface-proxy-arp.pkt)**
+    * **Core Concepts:** Outbound interface static configurations, "directly connected" illusions in the routing table, and the operational hazards of Proxy ARP reliance.
+* **[Lab 08: Multi-Router Ring Backbone Topology](./Part-2-Medium-Enterprise/lab-08-three-router-ring-backbone.pkt)**
+    * **Core Concepts:** Redundant multi-path triangular infrastructure and deploying Fully Specified Static Routes (combining both exit interface and next-hop IP).
+
 ---
 
 ## Verification & Diagnostic Toolkit
