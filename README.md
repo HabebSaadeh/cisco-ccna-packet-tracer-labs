@@ -32,6 +32,12 @@ To mimic practical, high-stability physical environments and eliminate software 
 * **[Lab 08: Multi-Router Ring Backbone Topology](./Part-2-Medium-Enterprise/lab-08-three-router-ring-backbone.pkt)**
     * **Core Concepts:** Redundant multi-path triangular infrastructure and deploying Fully Specified Static Routes (combining both exit interface and next-hop IP).
 
+### Part 3: Large Corporate Edge Infrastructure
+* **[Lab 09: Hub-and-Spoke Enterprise Core](./Part-3-Large-Corporate-Edge/lab-09-hub-and-spoke-enterprise.pkt)**
+    * **Core Concepts:** Non-contiguous subnetting (`/23` summaries), multi-hop static routing pathways, and tracking Layer 2 MAC translation updates vs. immutable Layer 3 IP headers across router hops.
+* **[Lab 10: Enterprise Edge & Gateway of Last Resort](./Part-3-Large-Corporate-Edge/lab-10-enterprise-edge-default-routing.pkt)**
+    * **Core Concepts:** Public IP infrastructure boundaries (`203.0.113.0/30`), configuring candidate default static routes (`0.0.0.0/0`), and edge routing traffic steering.
+
 ---
 
 ## Verification & Diagnostic Toolkit
