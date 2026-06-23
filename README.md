@@ -38,6 +38,20 @@ To mimic practical, high-stability physical environments and eliminate software 
 * **[Lab 10: Enterprise Edge & Gateway of Last Resort](./Part-3-Large-Corporate-Edge/lab-10-enterprise-edge-default-routing.pkt)**
     * **Core Concepts:** Public IP infrastructure boundaries (`203.0.113.0/30`), configuring candidate default static routes (`0.0.0.0/0`), and edge routing traffic steering.
 
+### Part 4: Classless Subnetting Mastery & VLSM Design
+* **[Lab 11: Fixed Class C Subdivision](./Part-4-Subnetting-and-VLSM/lab-11-fixed-class-c-subdivision.pkt)**
+    * **Core Concepts:** Host capacity formula ($2^H - 2$) application, classless boundary mapping, and multi-subnet local routing logic.
+* **[Lab 12: High-Speed Arbitrary Subnet Mapping](./Part-4-Subnetting-and-VLSM/lab-12-block-size-trick-mapping.pkt)**
+    * **Core Concepts:** Utilizing the decimal Block Size Trick ($256 - \text{Mask}$) to dynamically isolate host subnet boundaries without binary conversion.
+* **[Lab 13: Zero-Waste Router Interconnects](./Part-4-Subnetting-and-VLSM/lab-13-point-to-point-zero-waste.pkt)**
+    * **Core Concepts:** Traditional `/30` point-to-point link allocations alongside modern `/31` zero-overhead interface configuration alternatives.
+* **[Lab 14: Class B Subnetting Matrix Optimization](./Part-4-Subnetting-and-VLSM/lab-14-class-b-matrix-optimization.pkt)**
+    * **Core Concepts:** Third-octet network boundary manipulation, block size increments across Class B spaces, and cross-subnet asset verification.
+* **[Lab 15: Class A Massive Scaling Scheme](./Part-4-Subnetting-and-VLSM/lab-15-class-a-massive-scaling.pkt)**
+    * **Core Concepts:** Borrowing bits at scale across a default `/8` space, defining specific host ranges out of multi-million host pools, and variable prefix application.
+* **[Lab 16: Chronological VLSM Network Engineering](./Part-4-Subnetting-and-VLSM/lab-16-chronological-vlsm-design.pkt)**
+    * **Core Concepts:** Managing variable subnet requirements by enforcing the chronological allocation rule (largest host demands to smallest) to prevent overlapping layout boundaries.
+
 ---
 
 ## Verification & Diagnostic Toolkit
