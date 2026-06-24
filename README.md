@@ -52,6 +52,16 @@ To mimic practical, high-stability physical environments and eliminate software 
 * **[Lab 16: Chronological VLSM Network Engineering](./Part-4-Subnetting-and-VLSM/lab-16-chronological-vlsm-design.pkt)**
     * **Core Concepts:** Managing variable subnet requirements by enforcing the chronological allocation rule (largest host demands to smallest) to prevent overlapping layout boundaries.
 
+### Part 5: Virtual LAN Isolation & Layer 2 Segmentation
+* **[Lab 17: Flat Network Broadcast Domain Audit](./Part-5-VLAN-and-Layer2-Segmentation/lab-17-flat-network-broadcast-audit.pkt)**
+    * **Core Concepts:** Observing default VLAN 1 alignment, tracing broadcast frame behavior in a flat topology, and evaluating CPU interruption overhead on unsegmented hosts.
+* **[Lab 18: Logical VLAN Database Creation](./Part-5-VLAN-and-Layer2-Segmentation/lab-18-logical-vlan-database-creation.pkt)**
+    * **Core Concepts:** Managing the local switch database via the Cisco IOS CLI, building named logical data boundaries, and auditing allocations via `show vlan brief`.
+* **[Lab 19: Access Port VLAN Binding](./Part-5-VLAN-and-Layer2-Segmentation/lab-19-access-port-vlan-binding.pkt)**
+    * **Core Concepts:** Hardcoding switch port operational states (`switchport mode access`) and migrating physical host-facing interfaces into distinct broadcast segments.
+* **[Lab 20: Layer 2 Broadcast Isolation Verification](./Part-5-VLAN-and-Layer2-Segmentation/lab-20-layer2-broadcast-isolation-test.pkt)**
+    * **Core Concepts:** Simulating BUM (Broadcast, Unknown Unicast, Multicast) traffic constraints and validating true logical broadcast containment at the access layer.
+
 ---
 
 ## Verification & Diagnostic Toolkit
