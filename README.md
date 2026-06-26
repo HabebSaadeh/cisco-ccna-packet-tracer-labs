@@ -63,13 +63,13 @@ To mimic practical, high-stability physical environments and eliminate software 
     * **Core Concepts:** Simulating BUM (Broadcast, Unknown Unicast, Multicast) traffic constraints and validating true logical broadcast containment at the access layer.
  
 ### Part 6: Advanced Trunking, Native Overheads & Router-on-a-Stick (RoAS)
-* **[Lab 11: Explicit Dot1q Trunking & VLAN Matrix Filters](./Part-6-Trunking-and-InterVLAN-Routing/lab-11-explicit-vlan-trunk-filtering.pkt)**
+* **[Lab 21: Explicit Dot1q Trunking & VLAN Matrix Filters](./Part-6-Trunking-and-InterVLAN-Routing/lab-11-explicit-vlan-trunk-filtering.pkt)**
     * **Core Concepts:** Hardcoding static operational trunk modes, disabling dynamic trunking autonegotiation protocols, and modifying allowed VLAN matrices to selectively drop transit traffic.
-* **[Lab 12: Native VLAN Manipulation & Mismatch Analysis](./Part-6-Trunking-and-InterVLAN-Routing/lab-12-native-vlan-mismatch-analysis.pkt)**
+* **[Lab 22: Native VLAN Manipulation & Mismatch Analysis](./Part-6-Trunking-and-InterVLAN-Routing/lab-12-native-vlan-mismatch-analysis.pkt)**
     * **Core Concepts:** Migrating untagged frame pathways to custom native VLAN identifiers, analyzing native mismatch console logs, and evaluating 802.1Q header structures.
-* **[Lab 13: Router-on-a-Stick (RoAS) Logical Gateway Architecture](./Part-6-Trunking-and-InterVLAN-Routing/lab-13-router-on-a-stick-gateways.pkt)**
+* **[Lab 23: Router-on-a-Stick (RoAS) Logical Gateway Architecture](./Part-6-Trunking-and-InterVLAN-Routing/lab-13-router-on-a-stick-gateways.pkt)**
     * **Core Concepts:** Initializing single physical-to-logical interface partitions, mapping subinterfaces to corresponding VLAN IDs, and configuring discrete classless multi-subnet default gateways.
-* **[Lab 14: Advanced Native Gateways on Logical Subinterfaces](./Part-6-Trunking-and-InterVLAN-Routing/lab-14-advanced-subinterface-native.pkt)**
+* **[Lab 24: Advanced Native Gateways on Logical Subinterfaces](./Part-6-Trunking-and-InterVLAN-Routing/lab-14-advanced-subinterface-native.pkt)**
     * **Core Concepts:** Enforcing native untagged frame termination patterns on routing engines, utilizing encapsulation native flags, and comparing physical port gateway assignments.
 
 ---
