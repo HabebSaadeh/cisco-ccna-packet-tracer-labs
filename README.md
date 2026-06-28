@@ -72,6 +72,12 @@ To mimic practical, high-stability physical environments and eliminate software 
 * **[Lab 24: Advanced Native Gateways on Logical Subinterfaces](./Part-6-Trunking-and-InterVLAN-Routing/lab-14-advanced-subinterface-native.pkt)**
     * **Core Concepts:** Enforcing native untagged frame termination patterns on routing engines, utilizing encapsulation native flags, and comparing physical port gateway assignments.
 
+### Part 7: Multilayer Switching Fabric & Switch Virtual Interfaces (SVIs)
+* **[Lab 25: Switch Virtual Interface (SVI) Fabric Core Design](./Part-7-Multilayer-Switching-and-SVIs/lab-15-switch-virtual-interface-svi.pkt)**
+    * **Core Concepts:** Initializing Layer 3 processing engines via global routing activation, constructing multi-VLAN software-defined Switch Virtual Interfaces, and defining core hardware operational criteria.
+* **[Lab 26: Routed Interface Ports & Default Static Gateways](./Part-7-Multilayer-Switching-and-SVIs/lab-16-routed-ports-static-uplinks.pkt)**
+    * **Core Concepts:** Disabling Layer 2 switching protocols on physical port fabrics (`no switchport`), building zero-waste point-to-point transit blocks (`/30`), and designing manual default pathways to external edge boundaries.
+
 ---
 
 ## Verification & Diagnostic Toolkit
