@@ -78,6 +78,16 @@ To mimic practical, high-stability physical environments and eliminate software 
 * **[Lab 26: Routed Interface Ports & Default Static Gateways](./Part-7-Multilayer-Switching-and-SVIs/lab-16-routed-ports-static-uplinks.pkt)**
     * **Core Concepts:** Disabling Layer 2 switching protocols on physical port fabrics (`no switchport`), building zero-waste point-to-point transit blocks (`/30`), and designing manual default pathways to external edge boundaries.
 
+### Part 8: Spanning Tree Protocol (STP) Calculations & Advanced Toolkit Optimization
+* **[Lab 27: Spanning Tree Baseline Calculations & Root Election](./Part-8-Spanning-Tree-Protocol-and-Toolkit/lab-17-stp-root-bridge-elections.pkt)**
+    * **Core Concepts:** Investigating Root Bridge election criteria (System ID extensions + MAC cryptographic tie-breakers), calculating standard path costs, and mapping non-designated blocking states.
+* **[Lab 28: Manual Topology Tuning & Per-VLAN Load Balancing](./Part-8-Spanning-Tree-Protocol-and-Toolkit/lab-18-manual-stp-load-balancing.pkt)**
+    * **Core Concepts:** Overriding default Spanning Tree metrics using mathematical block modifiers (`4096`), configuring root primary/secondary alignments, and executing Per-VLAN link utilization load balancing.
+* **[Lab 29: PortFast Edge Transitions & BPDU Guard Protection](./Part-8-Spanning-Tree-Protocol-and-Toolkit/lab-19-portfast-edge-bpdu-guard.pkt)**
+    * **Core Concepts:** Enforcing immediate access layer edge forwarding state transitions, isolating transitional delays, and deploying active BPDU Guard defense mechanisms to auto-neutralize rogue switch attachments.
+* **[Lab 30: Unidirectional Loop Defense via Loop Guard](./Part-8-Spanning-Tree-Protocol-and-Toolkit/lab-20-loop-guard-unidirectional.pkt)**
+    * **Core Concepts:** Detecting physical Layer 1 media transmission failures (unidirectional links), mapping broken loop-inconsistent states, and configuring global vs. port-level defensive boundaries.
+
 ---
 
 ## Verification & Diagnostic Toolkit
