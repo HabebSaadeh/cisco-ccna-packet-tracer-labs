@@ -63,37 +63,29 @@ To mimic practical, high-stability physical environments and eliminate software 
     * **Core Concepts:** Simulating BUM (Broadcast, Unknown Unicast, Multicast) traffic constraints and validating true logical broadcast containment at the access layer.
  
 ### Part 6: Advanced Trunking, Native Overheads & Router-on-a-Stick (RoAS)
-* **[Lab 21: Explicit Dot1q Trunking & VLAN Matrix Filters](./Part-6-Trunking-and-InterVLAN-Routing/lab-11-explicit-vlan-trunk-filtering.pkt)**
+* **[Lab 21: Explicit Dot1q Trunking & VLAN Matrix Filters](./Part-6-Trunking-and-InterVLAN-Routing/lab-21-explicit-vlan-trunk-filtering.pkt)**
     * **Core Concepts:** Hardcoding static operational trunk modes, disabling dynamic trunking autonegotiation protocols, and modifying allowed VLAN matrices to selectively drop transit traffic.
-* **[Lab 22: Native VLAN Manipulation & Mismatch Analysis](./Part-6-Trunking-and-InterVLAN-Routing/lab-12-native-vlan-mismatch-analysis.pkt)**
+* **[Lab 22: Native VLAN Manipulation & Mismatch Analysis](./Part-6-Trunking-and-InterVLAN-Routing/lab-22-native-vlan-mismatch-analysis.pkt)**
     * **Core Concepts:** Migrating untagged frame pathways to custom native VLAN identifiers, analyzing native mismatch console logs, and evaluating 802.1Q header structures.
-* **[Lab 23: Router-on-a-Stick (RoAS) Logical Gateway Architecture](./Part-6-Trunking-and-InterVLAN-Routing/lab-13-router-on-a-stick-gateways.pkt)**
+* **[Lab 23: Router-on-a-Stick (RoAS) Logical Gateway Architecture](./Part-6-Trunking-and-InterVLAN-Routing/lab-23-router-on-a-stick-gateways.pkt)**
     * **Core Concepts:** Initializing single physical-to-logical interface partitions, mapping subinterfaces to corresponding VLAN IDs, and configuring discrete classless multi-subnet default gateways.
-* **[Lab 24: Advanced Native Gateways on Logical Subinterfaces](./Part-6-Trunking-and-InterVLAN-Routing/lab-14-advanced-subinterface-native.pkt)**
+* **[Lab 24: Advanced Native Gateways on Logical Subinterfaces](./Part-6-Trunking-and-InterVLAN-Routing/lab-24-advanced-subinterface-native.pkt)**
     * **Core Concepts:** Enforcing native untagged frame termination patterns on routing engines, utilizing encapsulation native flags, and comparing physical port gateway assignments.
 
 ### Part 7: Multilayer Switching Fabric & Switch Virtual Interfaces (SVIs)
-* **[Lab 25: Switch Virtual Interface (SVI) Fabric Core Design](./Part-7-Multilayer-Switching-and-SVIs/lab-15-switch-virtual-interface-svi.pkt)**
+* **[Lab 25: Switch Virtual Interface (SVI) Fabric Core Design](./Part-7-Multilayer-Switching-and-SVIs/lab-25-switch-virtual-interface-svi.pkt)**
     * **Core Concepts:** Initializing Layer 3 processing engines via global routing activation, constructing multi-VLAN software-defined Switch Virtual Interfaces, and defining core hardware operational criteria.
-* **[Lab 26: Routed Interface Ports & Default Static Gateways](./Part-7-Multilayer-Switching-and-SVIs/lab-16-routed-ports-static-uplinks.pkt)**
+* **[Lab 26: Routed Interface Ports & Default Static Gateways](./Part-7-Multilayer-Switching-and-SVIs/lab-26-routed-ports-static-uplinks.pkt)**
     * **Core Concepts:** Disabling Layer 2 switching protocols on physical port fabrics (`no switchport`), building zero-waste point-to-point transit blocks (`/30`), and designing manual default pathways to external edge boundaries.
 
 ### Part 8: Spanning Tree Protocol (STP) Calculations & Advanced Toolkit Optimization
-* **[Lab 27: Spanning Tree Baseline Calculations & Root Election](./Part-8-Spanning-Tree-Protocol-and-Toolkit/lab-17-stp-root-bridge-elections.pkt)**
+* **[Lab 27: Spanning Tree Baseline Calculations & Root Election](./Part-8-Spanning-Tree-Protocol-and-Toolkit/lab-27-stp-root-bridge-elections.pkt)**
     * **Core Concepts:** Investigating Root Bridge election criteria (System ID extensions + MAC cryptographic tie-breakers), calculating standard path costs, and mapping non-designated blocking states.
-* **[Lab 28: Manual Topology Tuning & Per-VLAN Load Balancing](./Part-8-Spanning-Tree-Protocol-and-Toolkit/lab-18-manual-stp-load-balancing.pkt)**
+* **[Lab 28: Manual Topology Tuning & Per-VLAN Load Balancing](./Part-8-Spanning-Tree-Protocol-and-Toolkit/lab-28-manual-stp-load-balancing.pkt)**
     * **Core Concepts:** Overriding default Spanning Tree metrics using mathematical block modifiers (`4096`), configuring root primary/secondary alignments, and executing Per-VLAN link utilization load balancing.
-* **[Lab 29: PortFast Edge Transitions & BPDU Guard Protection](./Part-8-Spanning-Tree-Protocol-and-Toolkit/lab-19-portfast-edge-bpdu-guard.pkt)**
+* **[Lab 29: PortFast Edge Transitions & BPDU Guard Protection](./Part-8-Spanning-Tree-Protocol-and-Toolkit/lab-29-portfast-edge-bpdu-guard.pkt)**
     * **Core Concepts:** Enforcing immediate access layer edge forwarding state transitions, isolating transitional delays, and deploying active BPDU Guard defense mechanisms to auto-neutralize rogue switch attachments.
-* **[Lab 30: Unidirectional Loop Defense via Loop Guard](./Part-8-Spanning-Tree-Protocol-and-Toolkit/lab-20-loop-guard-unidirectional.pkt)**
+* **[Lab 30: Unidirectional Loop Defense via Loop Guard](./Part-8-Spanning-Tree-Protocol-and-Toolkit/lab-30-loop-guard-unidirectional.pkt)**
     * **Core Concepts:** Detecting physical Layer 1 media transmission failures (unidirectional links), mapping broken loop-inconsistent states, and configuring global vs. port-level defensive boundaries.
 
 ---
-
-## Verification & Diagnostic Toolkit
-To validate the control plane and data plane stability across these labs, the following Cisco IOS diagnostic commands are continually utilized:
-```bash
-show ip interface brief      # Evaluate L1 physical status and L2 protocol framing
-show ip route                # Analyze routing logic, prefix lengths, and path selection
-show mac address-table       # Audit Layer 2 hardware address maps on switching fabrics
-show interfaces <interface>  # Investigate hardware metrics, CRC errors, and duplex performance
