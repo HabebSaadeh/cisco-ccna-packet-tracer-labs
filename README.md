@@ -181,7 +181,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
     * **What I did:** Partitioned a generic Class C block into 4 identical, structured blocks using the classic subnet formula to isolate broadcast boundaries for 45-device rooms.
     * **The Validation:** Verified successful cross-subnet transit across the newly structured `/26` segments and monitored local interface tracking.
     * <details>
-        <summary>🔎 Click to view Cisco IOS Verification Proof</summary>
+        <summary> Click to view Cisco IOS Verification Proof</summary>
 
         ```text
         R1# show ip route connected
@@ -195,7 +195,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
     * **What I did:** Practiced the real-world decimal **Block Size Trick** (`256 - Mask Value`) to find network boundaries instantly without tedious binary-to-decimal expansion.
     * **The Validation:** Verified that host `192.168.5.57/27` falls cleanly inside the native `192.168.5.32` subnet container block.
     * <details>
-        <summary>🔎 Click to view Cisco IOS Verification Proof</summary>
+        <summary> Click to view Cisco IOS Verification Proof</summary>
 
         ```text
         R1# show ip route connected
@@ -207,7 +207,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
     * **What I did:** Optimized serial-equivalent link configurations between point-to-point routers by transitioning away from heavy subnet masks down to zero-overhead limits.
     * **The Validation:** Compared a traditional `/30` point-to-point allocation against a modern, zero-overhead `/31` mask config to prove the router handles directed links without network or broadcast ID padding.
     * <details>
-        <summary>🔎 Click to view Cisco IOS Verification Proof</summary>
+        <summary> Click to view Cisco IOS Verification Proof</summary>
 
         ```text
         R_Left# show ip interface brief | include Gigabit0/0
@@ -222,7 +222,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
     * **What I did:** Shifted subnetworking boundaries into a large Class B address environment, managing block size changes directly in the third octet.
     * **The Validation:** Isolated an arbitrary host block (`172.25.217.192/21`) and proved it resolves directly to the `172.25.216.0` prefix space.
     * <details>
-        <summary>🔎 Click to view Cisco IOS Verification Proof</summary>
+        <summary> Click to view Cisco IOS Verification Proof</summary>
 
         ```text
         R1# show ip route | include 172.25
@@ -234,7 +234,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
     * **What I did:** Borrowed 11 bits out of a default `/8` enterprise block to generate thousands of isolated corporate subnets with customizable host spaces.
     * **The Validation:** Tracked down the exact network parameters for a specific host IP (`10.217.182.223`) out of millions of possible combinations.
     * <details>
-        <summary>🔎 Click to view Cisco IOS Verification Proof</summary>
+        <summary> Click to view Cisco IOS Verification Proof</summary>
 
         ```text
         R1# show ip route | include 10.
@@ -246,7 +246,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
     * **What I did:** Hard-enforced the golden rule of Variable-Length Subnet Masking: sorting and provisioning varied site requirements chronologically from the absolute largest host footprint down to the smallest link.
     * **The Validation:** Carved out Tokyo and Toronto offices cleanly out of a single `/24` space without overlapping a single bit boundary.
     * <details>
-        <summary>🔎 Click to view Cisco IOS Verification Proof</summary>
+        <summary> Click to view Cisco IOS Verification Proof</summary>
 
         ```text
         R_Tokyo# show ip route connected
