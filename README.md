@@ -263,7 +263,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
     * **What I did:** Analyzed a flat, unsegmented Layer 2 switch fabric where multiple departments shared the default factory configuration.
     * **The Validation:** Utilized Simulation Mode to watch a single broadcast frame clone itself and force every host NIC in the company to waste CPU resources processing a localized broadcast storm.
     * <details>
-        <summary>🔎 Click to view Cisco IOS Verification Proof</summary>
+        <summary> Click to view Cisco IOS Verification Proof</summary>
 
         ```text
         SW1# show vlan brief
@@ -277,7 +277,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
     * **What I did:** Broke up the flat layout by creating custom logical database containers for Engineering, HR, and Sales inside the switch database.
     * **The Validation:** Verified database persistence and checked that named VLAN matrices are ready before connecting devices.
     * <details>
-        <summary>🔎 Click to view Cisco IOS Verification Proof</summary>
+        <summary> Click to view Cisco IOS Verification Proof</summary>
 
         ```text
         SW1# show vlan brief
@@ -293,7 +293,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
     * **What I did:** Hardcoded individual physical switchports into single-VLAN access mode, removing them from the global default network.
     * **The Validation:** Audited the switch's hardware allocation map to prove that the interfaces have migrated into completely isolated forwarding pools.
     * <details>
-        <summary>🔎 Click to view Cisco IOS Verification Proof</summary>
+        <summary> Click to view Cisco IOS Verification Proof</summary>
 
         ```text
         SW1# show vlan brief
@@ -309,7 +309,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
     * **What I did:** Executed a full validation test across the newly segmented access layer to verify BUM (Broadcast, Unknown Unicast, Multicast) traffic constraints.
     * **The Validation:** Proved via Simulation Mode that a broadcast originating in VLAN 10 is completely blocked from bleeding into ports assigned to VLAN 20 or 30.
     * <details>
-        <summary>🔎 Click to view Cisco IOS Verification Proof</summary>
+        <summary> Click to view Cisco IOS Verification Proof</summary>
 
         ```text
         SW1# show mac address-table vlan 10
@@ -329,7 +329,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
     * **What I did:** Built a link between two switches. Hardcoded the port into trunk mode and modified the allowed VLAN trunking matrix to filter out unneeded data.
     * **The Validation:** Manually dropped VLAN 20 traffic from entering the inter-switch link, proving you can secure paths by controlling which VLAN IDs can pass over a trunk.
     * <details>
-        <summary>🔎 Click to view Cisco IOS Verification Proof</summary>
+        <summary> Click to view Cisco IOS Verification Proof</summary>
 
         ```text
         SW1# show interfaces trunk
@@ -345,7 +345,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
     * **What I did:** Moved the untagged traffic pathway away from the default VLAN 1 down to a custom native VLAN 1001 ID, then intentionally mismatched the configuration between neighbors.
     * **The Validation:** Analyzed CDP error logs to see how native mismatches misdirect untagged frames, accidentally leaking traffic across separate broadcast domains.
     * <details>
-        <summary>🔎 Click to view Cisco IOS Verification Proof</summary>
+        <summary> Click to view Cisco IOS Verification Proof</summary>
 
         ```text
         SW1# show interfaces trunk | include Native
@@ -360,7 +360,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
     * **What I did:** Connected a single physical 2911 router port to a trunking switch interface to handle inter-VLAN routing without using up multiple hardware interfaces.
     * **The Validation:** Split a physical interface into subinterfaces, hardcoded dot1q encapsulation tags on each, and successfully routed packets across separate networks.
     * <details>
-        <summary>🔎 Click to view Cisco IOS Verification Proof</summary>
+        <summary> Click to view Cisco IOS Verification Proof</summary>
 
         ```text
         R1# show ip interface brief | include .
@@ -374,7 +374,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
     * **What I did:** Configured a router to process untagged native frames coming from a switch trunk, exploring two different configuration methods.
     * **The Validation:** Validated Method A (using the `native` keyword on a subinterface) and Method B (binding the IP directly to the physical interface) to see how the router strips 802.1Q tags for native traffic.
     * <details>
-        <summary>🔎 Click to view Cisco IOS Verification Proof</summary>
+        <summary> Click to view Cisco IOS Verification Proof</summary>
 
         ```text
         R1# show running-config interface g0/0.10
@@ -392,7 +392,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
     * **What I did:** Turned on a multilayer switch's internal routing table (`ip routing`) to handle inter-VLAN routing inside the switch at wire speed, bypassing the single-link router bottleneck.
     * **The Validation:** Created logical Switch Virtual Interfaces (SVIs) and tracked down the exact physical requirements (like an active access port or trunk) needed to keep an SVI "up/up".
     * <details>
-        <summary>🔎 Click to view Cisco IOS Verification Proof</summary>
+        <summary> Click to view Cisco IOS Verification Proof</summary>
 
         ```text
         SW_Core# show ip interface brief | include Vlan
@@ -405,7 +405,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
     * **What I did:** Converted a standard Layer 2 switchport into a Layer 3 routed port using the `no switchport` command, establishing a point-to-point connection to an edge router.
     * **The Validation:** Verified that the port's role switched from switching to routing, and pointed a default static route to the edge router to reach external networks.
     * <details>
-        <summary>🔎 Click to view Cisco IOS Verification Proof</summary>
+        <summary> Click to view Cisco IOS Verification Proof</summary>
 
         ```text
         SW_Core# show interfaces status | include Gi0/1
@@ -422,7 +422,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
     * **What I did:** Wired three switches in a redundant triangle loop and analyzed how Spanning Tree calculates a loop-free path out of the box.
     * **The Validation:** Logged system parameters to analyze Root Bridge election variables (Priority + MAC address tie-breakers) and mapped out exactly which non-root port gets blocked.
     * <details>
-        <summary>🔎 Click to view Cisco IOS Verification Proof</summary>
+        <summary> Click to view Cisco IOS Verification Proof</summary>
 
         ```text
         SW3# show spanning-tree brief
@@ -443,7 +443,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
     * **What I did:** Overrode the default Spanning Tree values using the mandatory `4096` priority increments to configure custom root choices per VLAN.
     * **The Validation:** Configured SW1 as primary root for VLAN 10 and SW2 as primary root for VLAN 20, keeping both links active by load balancing different VLANs across different paths.
     * <details>
-        <summary>🔎 Click to view Cisco IOS Verification Proof</summary>
+        <summary> Click to view Cisco IOS Verification Proof</summary>
 
         ```text
         SW1# show spanning-tree vlan 10 | include root
@@ -459,7 +459,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
     * **What I did:** Configured PortFast on user access ports to bypass the 30-second listening/learning delay, and locked them down with BPDU Guard to protect against unauthorized switches.
     * **The Validation:** Connected a rogue switch to a port to trigger BPDU Guard, verifying that the port immediately shuts down and drops into an `err-disabled` state to protect the network.
     * <details>
-        <summary>🔎 Click to view Cisco IOS Verification Proof</summary>
+        <summary> Click to view Cisco IOS Verification Proof</summary>
 
         ```text
         SW1# show interfaces fa0/1 status
@@ -472,7 +472,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
     * **What I did:** Configured Loop Guard on root and non-designated ports to defend the backbone against physical link failures (like a fiber rx drop) that cause silent loops.
     * **The Validation:** Monitored the control plane to ensure that if BPDUs unexpectedly stop arriving, the port safely locks up in a `loop-inconsistent` broken state instead of opening up and creating a loop.
     * <details>
-        <summary>🔎 Click to view Cisco IOS Verification Proof</summary>
+        <summary> Click to view Cisco IOS Verification Proof</summary>
 
         ```text
         SW3# show spanning-tree inconsistentports
