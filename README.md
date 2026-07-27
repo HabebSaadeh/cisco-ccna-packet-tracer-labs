@@ -485,3 +485,52 @@ Welcome! This repository documents my practical learning journey as I learn netw
         </details>
 
 ---
+
+### Part 9: Fast Convergence & Link Aggregation
+ 
+* **[Lab 31: Rapid PVST+ Migration & Edge Optimization](./Part-9-Fast-Convergence-and-Link-Aggregation/lab-31-rapid-pvst-edge-tuning.pkt)**
+    * **What I did:** Migrated a three-switch redundant triangle from legacy 802.1D to Rapid PVST+ (802.1w). Configured root primary/secondary roles across VLANs 10 and 20, forced user-facing interfaces to operate as PortFast edge links, and hardcoded switch-to-switch links to `point-to-point`.
+    * **The Validation:** Simulated an active root link failure to prove sub-second convergence, verifying that Alternate ports immediately take over forwarding roles without undergoing classic 30–50 second listening/learning delays.
+    * <details>
+        <summary> Click to view Cisco IOS Verification Proof</summary>
+```text
+        SW1# show spanning-tree vlan 10
+ 
+        VLAN0010
+          Spanning tree enabled protocol rstp
+          Root ID      Priority    24586
+                       Address     0001.C710.A101
+                       This bridge is the root
+                       Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
+ 
+        Interface        Role Sts Cost      Prio.Nbr Type
+        ---------------- ---- ---- --------- -------- --------------------------------
+        Gi0/1            Desg FWD  4         128.1    P2p
+        Gi0/2            Desg FWD  4         128.2    P2p
+        Fa0/1            Desg FWD  19        128.3    Edge P2p
+```
+        </details>
+ 
+* **[Lab 32: Multi-Vendor LACP EtherChannel Aggregation](./Part-9-Fast-Convergence-and-Link-Aggregation/lab-32-lacp-etherchannel-aggregation.pkt)**
+    * **What I did:** Resolved access-to-distribution bandwidth oversubscription by bundling 4 parallel physical FastEthernet links into a single logical IEEE 802.3ad Port-Channel. Configured `active` mode on the access side, `passive` mode on the distribution side, and modified the global load-balancing algorithm to evaluate `src-dst-mac` hashes.
+    * **The Validation:** Verified that Spanning Tree treats the entire 4-link bundle as one single logical interface (`Po1`), preventing port blocking while aggregating throughput and ensuring sub-second hardware failover if an individual link drops.
+    * <details>
+        <summary> Click to view Cisco IOS Verification Proof</summary>
+```text
+        SW_Access# show etherchannel summary
+        Flags:  D - down        P - bundled in port-channel
+                I - stand-alone s - suspended
+                H - Hot-standby (LACP only)
+                R - Layer3      S - Layer2
+                U - in use      N - allocated to Port-channel
+ 
+        Group Port-Channel Protocol    Ports
+        ------+-------------+-----------+-----------------------------------------------
+        1     Po1(SU)        LACP        Fa0/1(P) Fa0/2(P) Fa0/3(P) Fa0/4(P)
+ 
+        SW_Access# show port-channel load-balance
+        Source & Destination MAC Address
+```
+        </details>
+ 
+---
