@@ -535,3 +535,76 @@ Welcome! This repository documents my practical learning journey as I learn netw
         </details>
  
 ---
+
+### Part 10: Dynamic Routing Foundations & Distance Vector Protocols
+
+* **[Lab 33: Floating Static Backup Routes & Path Selection](./Part-10-Dynamic-Routing-Foundations-and-Distance-Vector-Protocols/lab-33-floating-static-route-failover.pkt)**
+  * **What I did:** Configured redundant dual-homed ISP connectivity on an enterprise edge router. Mapped a primary static default route to ISP1 with default trustworthiness (AD 1) and built a secondary floating static route to ISP2 with a manually inflated Administrative Distance of 120.
+  * **The Validation:** Proved Administrative Distance hierarchy mechanics: verified that the inflated static route stays hidden from the active RIB until the primary physical uplink fails, at which point the backup path immediately "floats" into the routing table to maintain internet connectivity.
+  * <details>
+    <summary>Click to view Cisco IOS Verification Proof</summary>
+
+    ```text
+    R_Branch# show ip route static
+    Codes: L - local, C - connected, S - static
+    Gateway of last resort is 10.0.12.2 to network 0.0.0.0
+
+    S*   0.0.0.0/0 [1/0] via 10.0.12.2
+
+    -- Simulating Primary Link Drop (GigabitEthernet0/1 shutdown) --
+    %LINK-5-CHANGED: Interface GigabitEthernet0/1, changed state to administratively down
+
+    R_Branch# show ip route static
+    Gateway of last resort is 10.0.13.2 to network 0.0.0.0
+
+    S*   0.0.0.0/0 [120/0] via 10.0.13.2
+    ```
+    </details>
+
+* **[Lab 34: RIPv2 Classless Migration & Passive Interfaces](./Part-10-Dynamic-Routing-Foundations-and-Distance-Vector-Protocols/lab-34-ripv2-classless-passive-lan.pkt)**
+  * **What I did:** Upgraded a multi-branch network from classful routing behavior to RIPv2. Explicitly disabled automatic classful boundary summarization (`no auto-summary`) to preserve VLSM subnet allocations and enforced the `passive-interface` rule on all host-facing access segments.
+  * **The Validation:** Audited the control plane using `show ip protocols` to confirm that periodic 30-second RIP update broadcasts are blocked from leaking into client subnets, while verifying across the core link that classless subnet masks are exchanged via multicast 224.0.0.9.
+  * <details>
+    <summary>Click to view Cisco IOS Verification Proof</summary>
+
+    ```text
+    R_HQ# show ip protocols
+    Routing Protocol is "rip"
+      Sending updates every 30 seconds, next due in 18 seconds
+      Invalid after 180 seconds, hold down 180, flushed after 240
+      Outgoing update filter list for all interfaces is not set
+      Incoming update filter list for all interfaces is not set
+      Default version control: send version 2, receive version 2
+        Interface             Send  Recv  Triggered RIP  Key-chain
+        GigabitEthernet0/0    2     2     
+      Passive Interface(s):
+        GigabitEthernet0/1
+      Routing for Networks:
+        10.0.0.0
+        172.16.0.0
+      Automatic network number summarization is not in effect
+
+    R_HQ# show ip route rip
+    R    10.2.2.0/24 [120/1] via 172.16.0.2, 00:00:12, GigabitEthernet0/0
+    ```
+    </details>
+
+* **[Lab 35: EIGRP Autonomous Systems & Wildcard Engineering](./Part-10-Dynamic-Routing-Foundations-and-Distance-Vector-Protocols/lab-35-eigrp-as-wildcard-engineering.pkt)**
+  * **What I did:** Deployed EIGRP across a three-router enterprise mesh using Autonomous System 100. Bound interfaces dynamically using bitwise inverted Wildcard Masks (such as 0.0.0.3 for /30 point-to-point transit circuits), hardcoded manual 32-bit Router IDs, and muted local LAN segments with passive interface declarations.
+  * **The Validation:** Validated instantaneous neighbor discovery over multicast 224.0.0.10 and confirmed that routes are inserted into the RIB with identifier `D`, reflecting the DUAL composite metric (bandwidth and delay) rather than simple hop counts.
+  * <details>
+    <summary>Click to view Cisco IOS Verification Proof</summary>
+
+    ```text
+    R_Core# show ip eigrp neighbors
+    IP-EIGRP neighbors for process 100
+    H   Address                 Interface       Hold Uptime   SRTT   RTO  Q   Seq
+                                                (sec)         (ms)       Cnt  Num
+    0   10.1.12.1               Gi0/0             14 00:04:18   40   240  0    5
+    1   10.1.23.2               Gi0/1             11 00:03:52   35   210  0    8
+
+    R_Core# show ip route eigrp
+    D    172.16.10.0/24 [90/30720] via 10.1.12.1, 00:04:18, GigabitEthernet0/0
+    D    172.16.20.0/24 [90/30720] via 10.1.23.2, 00:03:52, GigabitEthernet0/1
+    ```
+    </details>
