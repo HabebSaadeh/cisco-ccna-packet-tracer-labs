@@ -8,7 +8,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
 
 ### Part 1: Small Office & Local Connectivity
 
-* **[Lab 01: Single-Switch LAN Baseline](./Part-1-Small-Office-LAN/lab-01-switch-lan-baseline.pkt)**
+* **[Lab 01: Single-Switch LAN Baseline](./Part-01-Small-Office-LAN/lab-01-switch-lan-baseline.pkt)**
     * **What I did:** Built a secure local network layer from scratch. Initialized line access, locked down Privileged EXEC mode with Type 5 MD5 hashing, and masked plain-text credentials.
     * **The Validation:** Verified how the switch dynamically maps physical source hardware addresses to internal ports and monitored table properties.
     * <details>
@@ -27,7 +27,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
         ```
         </details>
 
-* **[Lab 02: Advanced Switch Port Diagnostics & Duplex Mismatches](./Part-1-Small-Office-LAN/lab-02-switch-duplex-diagnostics.pkt)**
+* **[Lab 02: Advanced Switch Port Diagnostics & Duplex Mismatches](./Part-01-Small-Office-LAN/lab-02-switch-duplex-diagnostics.pkt)**
     * **What I did:** Intentionally forced a speed and duplex configuration anomaly between two interconnecting switches (one side hardcoded to full-duplex, the neighbor left to fall back to half-duplex).
     * **The Validation:** Analyzed why the link deceptively displays an "up/up" state while tracking physical port interface counters to watch packet drops, late collisions, and CRC errors accumulate.
     * <details>
@@ -48,7 +48,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
         ```
         </details>
 
-* **[Lab 03: Inter-Subnet Edge Gateway Deployment](./Part-1-Small-Office-LAN/lab-03-edge-gateway-deployment.pkt)**
+* **[Lab 03: Inter-Subnet Edge Gateway Deployment](./Part-01-Small-Office-LAN/lab-03-edge-gateway-deployment.pkt)**
     * **What I did:** Brought up a localized corporate file server on a completely separate subnet and bound the default gateway interfaces on a 2911 router.
     * **The Validation:** Tracked the exact execution mechanics of end-host ARP requests and documented why the first ICMP ping packet invariably drops (`.!!!!`) while waiting for address resolution.
     * <details>
@@ -67,7 +67,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
         ```
         </details>
 
-* **[Lab 04: Classless Addressing & VLSM Design](./Part-1-Small-Office-LAN/lab-04-classless-vlsm-constraints.pkt)**
+* **[Lab 04: Classless Addressing & VLSM Design](./Part-01-Small-Office-LAN/lab-04-classless-vlsm-constraints.pkt)**
     * **What I did:** Took a flat network block and carved it out using custom classless prefix boundaries to support a tight 30-host maximum per subnet segment.
     * **The Validation:** Audited the Layer 3 routing database to differentiate how the router tracks parent classless summary routes versus its internal `/32` host paths.
     * <details>
@@ -85,7 +85,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
 
 ### Part 2: Medium Enterprise Topologies
 
-* **[Lab 05: Multi-Router WAN Link Baseline](./Part-2-Medium-Enterprise/lab-05-dual-router-core.pkt)**
+* **[Lab 05: Multi-Router WAN Link Baseline](./Part-02-Medium-Enterprise/lab-05-dual-router-core.pkt)**
     * **What I did:** Linked two regional corporate branch offices using a tight, isolated `/30` point-to-point transit subnet between the router interfaces.
     * **The Validation:** Proved why cross-subnet communications fail immediately out of the box despite "up/up" interface configurations, due to the empty state of remote networks in the routing table.
     * <details>
@@ -101,7 +101,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
         ```
         </details>
 
-* **[Lab 06: Next-Hop IPv4 Static Routing](./Part-2-Medium-Enterprise/lab-06-next-hop-static-routing.pkt)**
+* **[Lab 06: Next-Hop IPv4 Static Routing](./Part-02-Medium-Enterprise/lab-06-next-hop-static-routing.pkt)**
     * **What I did:** Manual traffic engineering between branch sites using next-hop IP static route statements.
     * **The Validation:** Examined the routing table logic to show how next-hop routing forces recursive lookups, and verified the default Administrative Distance (AD) metrics of static routes.
     * <details>
@@ -115,7 +115,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
         ```
         </details>
 
-* **[Lab 07: Exit-Interface Static Routing & Proxy ARP](./Part-2-Medium-Enterprise/lab-07-exit-interface-proxy-arp.pkt)**
+* **[Lab 07: Exit-Interface Static Routing & Proxy ARP](./Part-02-Medium-Enterprise/lab-07-exit-interface-proxy-arp.pkt)**
     * **What I did:** Cleared out the previous next-hop routes and re-engineered path maps using only the outbound physical exit interface designator.
     * **The Validation:** Witnessed the deceptive "directly connected" illusion the router displays in the routing table and analyzed how this forces the device to rely completely on Proxy ARP resolution for every destination.
     * <details>
@@ -129,7 +129,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
         ```
         </details>
 
-* **[Lab 08: Multi-Router Ring Backbone Topology](./Part-2-Medium-Enterprise/lab-08-three-router-ring-backbone.pkt)**
+* **[Lab 08: Multi-Router Ring Backbone Topology](./Part-02-Medium-Enterprise/lab-08-three-router-ring-backbone.pkt)**
     * **What I did:** Built a highly available, triangular three-router core ring infrastructure linking Alpha, Beta, and Gamma sites.
     * **The Validation:** Programmed and verified Fully Specified Static Routes (mapping both the local exit port and the exact neighbor gateway IP) to ensure predictable, deterministic loop-free forwarding.
     * <details>
@@ -146,7 +146,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
 
 ### Part 3: Large Corporate Edge Infrastructure
 
-* **[Lab 09: Hub-and-Spoke Enterprise Core](./Part-3-Large-Corporate-Edge/lab-09-hub-and-spoke-enterprise.pkt)**
+* **[Lab 09: Hub-and-Spoke Enterprise Core](./Part-03-Large-Corporate-Edge/lab-09-hub-and-spoke-enterprise.pkt)**
     * **What I did:** Provisioned a central corporate headquarters (Hub) routing core acting as the single transit path for two isolated branch operations (Spokes) using a wide `/23` address block.
     * **The Validation:** Tracked data packets mid-transit to verify the absolute immutability of Layer 3 IP headers versus the constant rewrite and translation of Layer 2 MAC address frames at every single router hop.
     * <details>
@@ -159,7 +159,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
         ```
         </details>
 
-* **[Lab 10: Enterprise Edge & Gateway of Last Resort](./Part-3-Large-Corporate-Edge/lab-10-enterprise-edge-default-routing.pkt)**
+* **[Lab 10: Enterprise Edge & Gateway of Last Resort](./Part-03-Large-Corporate-Edge/lab-10-enterprise-edge-default-routing.pkt)**
     * **What I did:** Established a strict border perimeter network connecting a multi-subnet corporate topology to an external simulated ISP endpoint over a public IP space (`203.0.113.0/30`).
     * **The Validation:** Configured and evaluated a candidate default path (`0.0.0.0/0`) to verify how the routing engine populates its "Gateway of Last Resort" flag.
     * <details>
@@ -177,7 +177,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
 
 ### Part 4: Classless Subnetting Mastery & VLSM Design
 
-* **[Lab 11: Fixed Class C Subdivision](./Part-4-Subnetting-and-VLSM/lab-11-fixed-class-c-subdivision.pkt)**
+* **[Lab 11: Fixed Class C Subdivision](./Part-04-Subnetting-and-VLSM/lab-11-fixed-class-c-subdivision.pkt)**
     * **What I did:** Partitioned a generic Class C block into 4 identical, structured blocks using the classic subnet formula to isolate broadcast boundaries for 45-device rooms.
     * **The Validation:** Verified successful cross-subnet transit across the newly structured `/26` segments and monitored local interface tracking.
     * <details>
@@ -191,7 +191,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
         ```
         </details>
 
-* **[Lab 12: High-Speed Arbitrary Subnet Mapping](./Part-4-Subnetting-and-VLSM/lab-12-block-size-trick-mapping.pkt)**
+* **[Lab 12: High-Speed Arbitrary Subnet Mapping](./Part-04-Subnetting-and-VLSM/lab-12-block-size-trick-mapping.pkt)**
     * **What I did:** Practiced the real-world decimal **Block Size Trick** (`256 - Mask Value`) to find network boundaries instantly without tedious binary-to-decimal expansion.
     * **The Validation:** Verified that host `192.168.5.57/27` falls cleanly inside the native `192.168.5.32` subnet container block.
     * <details>
@@ -203,7 +203,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
         ```
         </details>
 
-* **[Lab 13: Zero-Waste Router Interconnects](./Part-4-Subnetting-and-VLSM/lab-13-point-to-point-zero-waste.pkt)**
+* **[Lab 13: Zero-Waste Router Interconnects](./Part-04-Subnetting-and-VLSM/lab-13-point-to-point-zero-waste.pkt)**
     * **What I did:** Optimized serial-equivalent link configurations between point-to-point routers by transitioning away from heavy subnet masks down to zero-overhead limits.
     * **The Validation:** Compared a traditional `/30` point-to-point allocation against a modern, zero-overhead `/31` mask config to prove the router handles directed links without network or broadcast ID padding.
     * <details>
@@ -218,7 +218,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
         ```
         </details>
 
-* **[Lab 14: Class B Subnetting Matrix Optimization](./Part-4-Subnetting-and-VLSM/lab-14-class-b-matrix-optimization.pkt)**
+* **[Lab 14: Class B Subnetting Matrix Optimization](./Part-04-Subnetting-and-VLSM/lab-14-class-b-matrix-optimization.pkt)**
     * **What I did:** Shifted subnetworking boundaries into a large Class B address environment, managing block size changes directly in the third octet.
     * **The Validation:** Isolated an arbitrary host block (`172.25.217.192/21`) and proved it resolves directly to the `172.25.216.0` prefix space.
     * <details>
@@ -230,7 +230,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
         ```
         </details>
 
-* **[Lab 15: Class A Massive Scaling Scheme](./Part-4-Subnetting-and-VLSM/lab-15-class-a-massive-scaling.pkt)**
+* **[Lab 15: Class A Massive Scaling Scheme](./Part-04-Subnetting-and-VLSM/lab-15-class-a-massive-scaling.pkt)**
     * **What I did:** Borrowed 11 bits out of a default `/8` enterprise block to generate thousands of isolated corporate subnets with customizable host spaces.
     * **The Validation:** Tracked down the exact network parameters for a specific host IP (`10.217.182.223`) out of millions of possible combinations.
     * <details>
@@ -242,7 +242,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
         ```
         </details>
 
-* **[Lab 16: Chronological VLSM Network Engineering](./Part-4-Subnetting-and-VLSM/lab-16-chronological-vlsm-design.pkt)**
+* **[Lab 16: Chronological VLSM Network Engineering](./Part-04-Subnetting-and-VLSM/lab-16-chronological-vlsm-design.pkt)**
     * **What I did:** Hard-enforced the golden rule of Variable-Length Subnet Masking: sorting and provisioning varied site requirements chronologically from the absolute largest host footprint down to the smallest link.
     * **The Validation:** Carved out Tokyo and Toronto offices cleanly out of a single `/24` space without overlapping a single bit boundary.
     * <details>
@@ -259,7 +259,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
 
 ### Part 5: Virtual LAN Isolation & Layer 2 Segmentation
 
-* **[Lab 17: Flat Network Broadcast Domain Audit](./Part-5-VLAN-and-Layer2-Segmentation/lab-17-flat-network-broadcast-audit.pkt)**
+* **[Lab 17: Flat Network Broadcast Domain Audit](./Part-05-VLAN-and-Layer2-Segmentation/lab-17-flat-network-broadcast-audit.pkt)**
     * **What I did:** Analyzed a flat, unsegmented Layer 2 switch fabric where multiple departments shared the default factory configuration.
     * **The Validation:** Utilized Simulation Mode to watch a single broadcast frame clone itself and force every host NIC in the company to waste CPU resources processing a localized broadcast storm.
     * <details>
@@ -273,7 +273,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
         ```
         </details>
 
-* **[Lab 18: Logical VLAN Database Creation](./Part-5-VLAN-and-Layer2-Segmentation/lab-18-logical-vlan-database-creation.pkt)**
+* **[Lab 18: Logical VLAN Database Creation](./Part-05-VLAN-and-Layer2-Segmentation/lab-18-logical-vlan-database-creation.pkt)**
     * **What I did:** Broke up the flat layout by creating custom logical database containers for Engineering, HR, and Sales inside the switch database.
     * **The Validation:** Verified database persistence and checked that named VLAN matrices are ready before connecting devices.
     * <details>
@@ -289,7 +289,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
         ```
         </details>
 
-* **[Lab 19: Access Port VLAN Binding](./Part-5-VLAN-and-Layer2-Segmentation/lab-19-access-port-vlan-binding.pkt)**
+* **[Lab 19: Access Port VLAN Binding](./Part-05-VLAN-and-Layer2-Segmentation/lab-19-access-port-vlan-binding.pkt)**
     * **What I did:** Hardcoded individual physical switchports into single-VLAN access mode, removing them from the global default network.
     * **The Validation:** Audited the switch's hardware allocation map to prove that the interfaces have migrated into completely isolated forwarding pools.
     * <details>
@@ -305,7 +305,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
         ```
         </details>
 
-* **[Lab 20: Layer 2 Broadcast Isolation Verification](./Part-5-VLAN-and-Layer2-Segmentation/lab-20-layer2-broadcast-isolation-test.pkt)**
+* **[Lab 20: Layer 2 Broadcast Isolation Verification](./Part-05-VLAN-and-Layer2-Segmentation/lab-20-layer2-broadcast-isolation-test.pkt)**
     * **What I did:** Executed a full validation test across the newly segmented access layer to verify BUM (Broadcast, Unknown Unicast, Multicast) traffic constraints.
     * **The Validation:** Proved via Simulation Mode that a broadcast originating in VLAN 10 is completely blocked from bleeding into ports assigned to VLAN 20 or 30.
     * <details>
@@ -325,7 +325,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
 
 ### Part 6: Advanced Trunking, Native Overheads & Router-on-a-Stick (RoAS)
 
-* **[Lab 21: Explicit Dot1q Trunking & VLAN Matrix Filters](./Part-6-Trunking-and-InterVLAN-Routing/lab-21-explicit-vlan-trunk-filtering.pkt)**
+* **[Lab 21: Explicit Dot1q Trunking & VLAN Matrix Filters](./Part-06-Trunking-and-InterVLAN-Routing/lab-21-explicit-vlan-trunk-filtering.pkt)**
     * **What I did:** Built a link between two switches. Hardcoded the port into trunk mode and modified the allowed VLAN trunking matrix to filter out unneeded data.
     * **The Validation:** Manually dropped VLAN 20 traffic from entering the inter-switch link, proving you can secure paths by controlling which VLAN IDs can pass over a trunk.
     * <details>
@@ -341,7 +341,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
         ```
         </details>
 
-* **[Lab 22: Native VLAN Manipulation & Mismatch Analysis](./Part-6-Trunking-and-InterVLAN-Routing/lab-22-native-vlan-mismatch-analysis.pkt)**
+* **[Lab 22: Native VLAN Manipulation & Mismatch Analysis](./Part-06-Trunking-and-InterVLAN-Routing/lab-22-native-vlan-mismatch-analysis.pkt)**
     * **What I did:** Moved the untagged traffic pathway away from the default VLAN 1 down to a custom native VLAN 1001 ID, then intentionally mismatched the configuration between neighbors.
     * **The Validation:** Analyzed CDP error logs to see how native mismatches misdirect untagged frames, accidentally leaking traffic across separate broadcast domains.
     * <details>
@@ -356,7 +356,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
         ```
         </details>
 
-* **[Lab 23: Router-on-a-Stick (RoAS) Logical Gateway Architecture](./Part-6-Trunking-and-InterVLAN-Routing/lab-23-router-on-a-stick-gateways.pkt)**
+* **[Lab 23: Router-on-a-Stick (RoAS) Logical Gateway Architecture](./Part-06-Trunking-and-InterVLAN-Routing/lab-23-router-on-a-stick-gateways.pkt)**
     * **What I did:** Connected a single physical 2911 router port to a trunking switch interface to handle inter-VLAN routing without using up multiple hardware interfaces.
     * **The Validation:** Split a physical interface into subinterfaces, hardcoded dot1q encapsulation tags on each, and successfully routed packets across separate networks.
     * <details>
@@ -370,7 +370,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
         ```
         </details>
 
-* **[Lab 24: Advanced Native Gateways on Logical Subinterfaces](./Part-6-Trunking-and-InterVLAN-Routing/lab-24-advanced-subinterface-native.pkt)**
+* **[Lab 24: Advanced Native Gateways on Logical Subinterfaces](./Part-06-Trunking-and-InterVLAN-Routing/lab-24-advanced-subinterface-native.pkt)**
     * **What I did:** Configured a router to process untagged native frames coming from a switch trunk, exploring two different configuration methods.
     * **The Validation:** Validated Method A (using the `native` keyword on a subinterface) and Method B (binding the IP directly to the physical interface) to see how the router strips 802.1Q tags for native traffic.
     * <details>
@@ -388,7 +388,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
 
 ### Part 7: Multilayer Switching Fabric & Switch Virtual Interfaces (SVIs)
 
-* **[Lab 25: Switch Virtual Interface (SVI) Fabric Core Design](./Part-7-Multilayer-Switching-and-SVIs/lab-25-switch-virtual-interface-svi.pkt)**
+* **[Lab 25: Switch Virtual Interface (SVI) Fabric Core Design](./Part-07-Multilayer-Switching-and-SVIs/lab-25-switch-virtual-interface-svi.pkt)**
     * **What I did:** Turned on a multilayer switch's internal routing table (`ip routing`) to handle inter-VLAN routing inside the switch at wire speed, bypassing the single-link router bottleneck.
     * **The Validation:** Created logical Switch Virtual Interfaces (SVIs) and tracked down the exact physical requirements (like an active access port or trunk) needed to keep an SVI "up/up".
     * <details>
@@ -401,7 +401,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
         ```
         </details>
 
-* **[Lab 26: Routed Interface Ports & Default Static Gateways](./Part-7-Multilayer-Switching-and-SVIs/lab-26-routed-ports-static-uplinks.pkt)**
+* **[Lab 26: Routed Interface Ports & Default Static Gateways](./Part-07-Multilayer-Switching-and-SVIs/lab-26-routed-ports-static-uplinks.pkt)**
     * **What I did:** Converted a standard Layer 2 switchport into a Layer 3 routed port using the `no switchport` command, establishing a point-to-point connection to an edge router.
     * **The Validation:** Verified that the port's role switched from switching to routing, and pointed a default static route to the edge router to reach external networks.
     * <details>
@@ -418,7 +418,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
 
 ### Part 8: Spanning Tree Protocol (STP) Calculations & Advanced Toolkit Optimization
 
-* **[Lab 27: Spanning Tree Baseline Calculations & Root Election](./Part-8-Spanning-Tree-Protocol-and-Toolkit/lab-27-stp-root-bridge-elections.pkt)**
+* **[Lab 27: Spanning Tree Baseline Calculations & Root Election](./Part-08-Spanning-Tree-Protocol-and-Toolkit/lab-27-stp-root-bridge-elections.pkt)**
     * **What I did:** Wired three switches in a redundant triangle loop and analyzed how Spanning Tree calculates a loop-free path out of the box.
     * **The Validation:** Logged system parameters to analyze Root Bridge election variables (Priority + MAC address tie-breakers) and mapped out exactly which non-root port gets blocked.
     * <details>
@@ -439,7 +439,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
         ```
         </details>
 
-* **[Lab 28: Manual Topology Tuning & Per-VLAN Load Balancing](./Part-8-Spanning-Tree-Protocol-and-Toolkit/lab-28-manual-stp-load-balancing.pkt)**
+* **[Lab 28: Manual Topology Tuning & Per-VLAN Load Balancing](./Part-08-Spanning-Tree-Protocol-and-Toolkit/lab-28-manual-stp-load-balancing.pkt)**
     * **What I did:** Overrode the default Spanning Tree values using the mandatory `4096` priority increments to configure custom root choices per VLAN.
     * **The Validation:** Configured SW1 as primary root for VLAN 10 and SW2 as primary root for VLAN 20, keeping both links active by load balancing different VLANs across different paths.
     * <details>
@@ -455,7 +455,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
         ```
         </details>
 
-* **[Lab 29: PortFast Edge Transitions & BPDU Guard Protection](./Part-8-Spanning-Tree-Protocol-and-Toolkit/lab-29-portfast-edge-bpdu-guard.pkt)**
+* **[Lab 29: PortFast Edge Transitions & BPDU Guard Protection](./Part-08-Spanning-Tree-Protocol-and-Toolkit/lab-29-portfast-edge-bpdu-guard.pkt)**
     * **What I did:** Configured PortFast on user access ports to bypass the 30-second listening/learning delay, and locked them down with BPDU Guard to protect against unauthorized switches.
     * **The Validation:** Connected a rogue switch to a port to trigger BPDU Guard, verifying that the port immediately shuts down and drops into an `err-disabled` state to protect the network.
     * <details>
@@ -468,7 +468,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
         ```
         </details>
 
-* **[Lab 30: Unidirectional Loop Defense via Loop Guard](./Part-8-Spanning-Tree-Protocol-and-Toolkit/lab-30-loop-guard-unidirectional.pkt)**
+* **[Lab 30: Unidirectional Loop Defense via Loop Guard](./Part-08-Spanning-Tree-Protocol-and-Toolkit/lab-30-loop-guard-unidirectional.pkt)**
     * **What I did:** Configured Loop Guard on root and non-designated ports to defend the backbone against physical link failures (like a fiber rx drop) that cause silent loops.
     * **The Validation:** Monitored the control plane to ensure that if BPDUs unexpectedly stop arriving, the port safely locks up in a `loop-inconsistent` broken state instead of opening up and creating a loop.
     * <details>
@@ -488,7 +488,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
 
 ### Part 9: Fast Convergence & Link Aggregation
  
-* **[Lab 31: Rapid PVST+ Migration & Edge Optimization](./Part-9-Fast-Convergence-and-Link-Aggregation/lab-31-rapid-pvst-edge-tuning.pkt)**
+* **[Lab 31: Rapid PVST+ Migration & Edge Optimization](./Part-09-Fast-Convergence-and-Link-Aggregation/lab-31-rapid-pvst-edge-tuning.pkt)**
     * **What I did:** Migrated a three-switch redundant triangle from legacy 802.1D to Rapid PVST+ (802.1w). Configured root primary/secondary roles across VLANs 10 and 20, forced user-facing interfaces to operate as PortFast edge links, and hardcoded switch-to-switch links to `point-to-point`.
     * **The Validation:** Simulated an active root link failure to prove sub-second convergence, verifying that Alternate ports immediately take over forwarding roles without undergoing classic 30–50 second listening/learning delays.
     * <details>
@@ -511,7 +511,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
         ```
         </details>
  
-* **[Lab 32: Multi-Vendor LACP EtherChannel Aggregation](./Part-9-Fast-Convergence-and-Link-Aggregation/lab-32-lacp-etherchannel-aggregation.pkt)**
+* **[Lab 32: Multi-Vendor LACP EtherChannel Aggregation](./Part-09-Fast-Convergence-and-Link-Aggregation/lab-32-lacp-etherchannel-aggregation.pkt)**
     * **What I did:** Resolved access-to-distribution bandwidth oversubscription by bundling 4 parallel physical FastEthernet links into a single logical IEEE 802.3ad Port-Channel. Configured `active` mode on the access side, `passive` mode on the distribution side, and modified the global load-balancing algorithm to evaluate `src-dst-mac` hashes.
     * **The Validation:** Verified that Spanning Tree treats the entire 4-link bundle as one single logical interface (`Po1`), preventing port blocking while aggregating throughput and ensuring sub-second hardware failover if an individual link drops.
     * <details>
@@ -538,7 +538,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
 
 ### Part 10: Dynamic Routing Foundations & Distance Vector Protocols
 
-* **[Lab 33: Floating Static Backup Routes & Path Selection](./Part-10-Dynamic-Routing-Foundations-and-Distance-Vector-Protocols/lab-33-floating-static-route-failover.pkt)**
+* **[Lab 33: Floating Static Backup Routes & Path Selection](./Part-010-Dynamic-Routing-Foundations-and-Distance-Vector-Protocols/lab-33-floating-static-route-failover.pkt)**
   * **What I did:** Configured redundant dual-homed ISP connectivity on an enterprise edge router. Mapped a primary static default route to ISP1 with default trustworthiness (AD 1) and built a secondary floating static route to ISP2 with a manually inflated Administrative Distance of 120.
   * **The Validation:** Proved Administrative Distance hierarchy mechanics: verified that the inflated static route stays hidden from the active RIB until the primary physical uplink fails, at which point the backup path immediately "floats" into the routing table to maintain internet connectivity.
   * <details>
@@ -561,7 +561,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
     ```
     </details>
 
-* **[Lab 34: RIPv2 Classless Migration & Passive Interfaces](./Part-10-Dynamic-Routing-Foundations-and-Distance-Vector-Protocols/lab-34-ripv2-classless-passive-lan.pkt)**
+* **[Lab 34: RIPv2 Classless Migration & Passive Interfaces](./Part-010-Dynamic-Routing-Foundations-and-Distance-Vector-Protocols/lab-34-ripv2-classless-passive-lan.pkt)**
   * **What I did:** Upgraded a multi-branch network from classful routing behavior to RIPv2. Explicitly disabled automatic classful boundary summarization (`no auto-summary`) to preserve VLSM subnet allocations and enforced the `passive-interface` rule on all host-facing access segments.
   * **The Validation:** Audited the control plane using `show ip protocols` to confirm that periodic 30-second RIP update broadcasts are blocked from leaking into client subnets, while verifying across the core link that classless subnet masks are exchanged via multicast 224.0.0.9.
   * <details>
@@ -589,7 +589,7 @@ Welcome! This repository documents my practical learning journey as I learn netw
     ```
     </details>
 
-* **[Lab 35: EIGRP Autonomous Systems & Wildcard Engineering](./Part-10-Dynamic-Routing-Foundations-and-Distance-Vector-Protocols/lab-35-eigrp-as-wildcard-engineering.pkt)**
+* **[Lab 35: EIGRP Autonomous Systems & Wildcard Engineering](./Part-010-Dynamic-Routing-Foundations-and-Distance-Vector-Protocols/lab-35-eigrp-as-wildcard-engineering.pkt)**
   * **What I did:** Deployed EIGRP across a three-router enterprise mesh using Autonomous System 100. Bound interfaces dynamically using bitwise inverted Wildcard Masks (such as 0.0.0.3 for /30 point-to-point transit circuits), hardcoded manual 32-bit Router IDs, and muted local LAN segments with passive interface declarations.
   * **The Validation:** Validated instantaneous neighbor discovery over multicast 224.0.0.10 and confirmed that routes are inserted into the RIB with identifier `D`, reflecting the DUAL composite metric (bandwidth and delay) rather than simple hop counts.
   * <details>
