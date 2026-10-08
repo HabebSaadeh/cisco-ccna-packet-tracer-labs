@@ -608,3 +608,73 @@ Welcome! This repository documents my practical learning journey as I learn netw
     D    172.16.20.0/24 [90/30720] via 10.1.23.2, 00:03:52, GigabitEthernet0/1
     ```
     </details>
+
+---
+
+### Part 11: OSPFv2 Architecture & Adjacency Optimization
+
+* **[Lab 36: Single-Area OSPFv2 & Cost Path Adjustments](./Part-11-OSPFv2-Architecture-and-Adjacency-Optimization/lab-36-ospfv2-reference-bandwidth-cost.pkt)**
+  * **What I did:** Deployed single-area OSPFv2 across a three-router ring topology in Area 0. Adjusted the global auto-cost reference-bandwidth from the legacy default of 100 Mbps to 1000 Mbps across all nodes to differentiate GigabitEthernet links from FastEthernet, and manually overrode cost metrics on specific transit interfaces to engineer asymmetric traffic paths.
+  * **The Validation:** Verified that changing the reference bandwidth recalculated link metrics across the Link State Database (LSDB) and confirmed via the routing table that OSPF selects end-to-end paths based strictly on accumulated interface costs.
+  * <details>
+    <summary>Click to view Cisco IOS Verification Proof</summary>
+
+    ```text
+    R1# show ip ospf interface gigabitEthernet 0/0
+    GigabitEthernet0/0 is up, line protocol is up
+      Header bytes 0, flag type 0
+      Process ID 1, Router ID 1.1.1.1, Network Type BROADCAST, Cost: 1
+      Enabled by interface config (or matching area)
+      Transmit Delay is 1 sec, State DR, Priority 1
+
+    R1# show ip ospf interface gigabitEthernet 0/1
+    GigabitEthernet0/1 is up, line protocol is up
+      Process ID 1, Router ID 1.1.1.1, Network Type BROADCAST, Cost: 50
+      Enabled by interface config (or matching area)
+
+    R1# show ip route ospf
+    O    172.16.20.0/24 [110/51] via 10.1.12.2, 00:08:14, GigabitEthernet0/0
+    ```
+    </details>
+
+* **[Lab 37: OSPF DR/BDR Non-Preemptive Elections on Multi-Access LANs](./Part-11-OSPFv2-Architecture-and-Adjacency-Optimization/lab-37-ospf-dr-bdr-multiaccess-elections.pkt)**
+  * **What I did:** Engineered OSPF Designated Router (DR) and Backup Designated Router (BDR) roles across a multi-access broadcast Ethernet segment shared by three routers. Set interface priorities (255 on R_Master, 100 on R_Backup, and 0 on R_Member) and evaluated the non-preemptive election behavior during process resets.
+  * **The Validation:** Verified that setting an interface priority to 0 permanently isolates a node from participating in elections, locking R_Member into a stable 2-Way/DROther state while validating that FULL adjacencies are formed exclusively with the elected DR and BDR.
+  * <details>
+    <summary>Click to view Cisco IOS Verification Proof</summary>
+
+    ```text
+    R_Member# show ip ospf neighbor
+    Neighbor ID     Pri   State           Dead Time   Address         Interface
+    1.1.1.1         255   FULL/DR         00:00:36    192.168.100.1   GigabitEthernet0/0
+    2.2.2.2         100   FULL/BDR        00:00:32    192.168.100.2   GigabitEthernet0/0
+
+    R_Master# show ip ospf interface gigabitEthernet 0/0
+    GigabitEthernet0/0 is up, line protocol is up
+      Process ID 1, Router ID 1.1.1.1, Network Type BROADCAST, Cost: 1
+      State DR, Priority 255
+      Designated Router (ID) 1.1.1.1, Interface address 192.168.100.1
+      Backup Dedicated Router (ID) 2.2.2.2, Interface address 192.168.100.2
+    ```
+    </details>
+
+* **[Lab 38: Point-to-Point OSPF Optimization & Edge Default Propagation](./Part-11-OSPFv2-Architecture-and-Adjacency-Optimization/lab-38-ospf-p2p-default-route-propagation.pkt)**
+  * **What I did:** Optimized OSPF performance by forcing point-to-point network types (`ip ospf network point-to-point`) on direct inter-router serial/Ethernet links to bypass unnecessary DR/BDR elections. Applied bulk passive interface enforcement (`passive-interface default`) with selective un-passivation, and injected an edge static route down to the internal campus using `default-information originate`.
+  * **The Validation:** Confirmed that point-to-point links form instant FULL adjacencies without DR/BDR election overhead and verified that internal routers populate their routing tables with OSPF External Type 2 (`O*E2`) candidate default routes.
+  * <details>
+    <summary>Click to view Cisco IOS Verification Proof</summary>
+
+    ```text
+    R_Branch# show ip ospf interface gigabitEthernet 0/0
+    GigabitEthernet0/0 is up, line protocol is up
+      Process ID 1, Router ID 3.3.3.3, Network Type POINT_TO_POINT, Cost: 1
+      Enabled by interface config (or matching area)
+      State POINT_TO_POINT, Priority 0
+      No designated router on this network
+
+    R_Branch# show ip route ospf
+    O*E2 0.0.0.0/0 [110/1] via 10.1.13.1, 00:04:22, GigabitEthernet0/0
+    ```
+    </details>
+
+---
