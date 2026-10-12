@@ -678,3 +678,51 @@ Welcome! This repository documents my practical learning journey as I learn netw
     </details>
 
 ---
+
+### Part 12: Gateway Redundancy & Core Transport Mechanics
+
+* **[Lab 39: HSRPv2 Multi-Group Active/Standby Load Balancing](./Part-12-Gateway-Redundancy-and-Core-Transport-Mechanics/lab-39-hsrpv2-multi-group-redundancy.pkt)**
+  * **What I did:** Implemented dual-router first-hop gateway redundancy using HSRPv2 across two VLANs. Configured R_GW1 as Active for VLAN 10 (Sales) and Standby for VLAN 20 (Engineering), while setting R_GW2 as Active for VLAN 20 and Standby for VLAN 10 to achieve active/active multi-group load sharing across core uplinks.
+  * **The Validation:** Simulated a primary gateway outage by shutting down an active interface to verify transparent failover. Confirmed that preemption restored the primary router to active status upon recovery, and audited the Virtual MAC format (`0000.0C9F.Fxxx`) to verify HSRPv2 operation.
+  * <details>
+    <summary>Click to view Cisco IOS Verification Proof</summary>
+
+    ```text
+    R_GW1# show standby brief
+                 P indicates configured preempt.
+                 |
+    Interface   Grp  Pri P State   Active          Standby         Virtual IP
+    Gi0/0.10    10   120 P Active  local           172.16.10.252   172.16.10.254
+    Gi0/0.20    20   100 P Standby 172.16.20.252   local           172.16.20.254
+
+    R_GW1# show standby gigabitEthernet 0/0.10
+    GigabitEthernet0/0.10 - Group 10 (HSRP v2)
+      State is Active
+      Virtual IP address is 172.16.10.254
+      Active virtual MAC address is 0000.0c9f.f00a (local)
+      Local virtual MAC address is 0000.0c9f.f00a (v2 default)
+      Preemption enabled
+      Priority 120 (configured 120)
+    ```
+    </details>
+
+* **[Lab 40: Transport Layer Mechanics & Application Port Filtering](./Part-12-Gateway-Redundancy-and-Core-Transport-Mechanics/lab-40-tcp-udp-transport-flow-analysis.pkt)**
+  * **What I did:** Analyzed and documented Layer 4 end-to-end transport behavior across a dual-homed server farm. Captured connection-oriented TCP flows (HTTP/SSH) alongside connectionless UDP streams (DNS/TFTP) using Packet Tracer Simulation Mode to evaluate header overhead and session multiplexing.
+  * **The Validation:** Examined PDU header details to contrast TCP’s 20-byte base header and 3-Way Handshake (SYN, SYN-ACK, ACK) sequence tracking against UDP’s lightweight 8-byte header and best-effort delivery mechanism.
+  * <details>
+    <summary>Click to view Cisco IOS Verification Proof</summary>
+
+    ```text
+    R_ServerFarm# show ip sockets
+    Proto    Remote Address         Port  Local Address          Port  In Out Conn-ID
+     17      -- free --             0     10.0.0.20              53    0   0  0     (UDP/DNS)
+     6       192.168.1.50           49152 10.0.0.10              80    0   0  1     (TCP/HTTP ESTAB)
+
+    -- TCP Session Handshake Capture --
+    [TCP Header] Source Port: 49152, Destination Port: 80, Seq: 0, Ack: 0, Flags: [SYN]
+    [TCP Header] Source Port: 80, Destination Port: 49152, Seq: 0, Ack: 1, Flags: [SYN, ACK]
+    [TCP Header] Source Port: 49152, Destination Port: 80, Seq: 1, Ack: 1, Flags: [ACK]
+    ```
+    </details>
+
+```
