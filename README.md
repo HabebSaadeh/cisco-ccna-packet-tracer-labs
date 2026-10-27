@@ -792,3 +792,51 @@ Welcome! This repository documents my practical learning journey as I learn netw
          via 2001:DB8:13::2
     ```
     </details>
+
+---
+
+### Part 14: IPv4 Security & Traffic Filtering with ACLs
+
+* **[Lab 44: Standard Numbered & Named ACL Deployment](./Part-14-IPv4-Security-and-Traffic-Filtering-with-ACLs/lab-44-ipv4-standard-acl-placement-filtering.pkt)**
+  * **What I did:** Designed and implemented Standard IPv4 Access Control Lists to restrict access to a sensitive Finance Server segment. Applied the golden rule of standard ACL placement by filtering outbound on the router interface closest to the destination, explicitly permitted a single administrative workstation (`/32`), blocked the remaining Sales and Engineering subnets using inverse wildcard masks, and overrode the implicit deny with an explicit permit rule.
+  * **The Validation:** Verified sequential top-to-bottom rule execution and first-match behavior via `show ip access-lists`. Confirmed that packets from the permitted admin workstation increment the permit match counter, while traffic from unauthorized subnets is dropped immediately at the destination perimeter interface.
+  * <details>
+    <summary>Click to view Cisco IOS Verification Proof</summary>
+
+    ```text
+    R_Finance# show ip access-lists BLOCK_FINANCE
+    Standard IP access list BLOCK_FINANCE
+        10 permit 192.168.20.50 (18 matches)
+        20 deny   192.168.10.0, wildcard bits 0.0.0.255 (42 matches)
+        30 deny   192.168.20.0, wildcard bits 0.0.0.255 (36 matches)
+        40 permit any (114 matches)
+
+    R_Finance# show ip interface gigabitEthernet 0/0 | include access list
+      Inbound  access list is not set
+      Outbound access list is BLOCK_FINANCE
+    ```
+    </details>
+
+* **[Lab 45: Extended Named ACLs & Application Port Suppression](./Part-14-IPv4-Security-and-Traffic-Filtering-with-ACLs/lab-45-ipv4-extended-acl-port-security.pkt)**
+  * **What I did:** Built an Extended Named ACL (`PERIMETER_FILTER`) to enforce granular Layer 3 and Layer 4 security boundaries. Followed best practice by binding the list inbound at the ingress interface closest to the traffic source to discard unauthorized packets early and conserve bandwidth across WAN circuits.
+  * **The Validation:** Filtered bidirectional flows based on protocol types (TCP, UDP, ICMP) and specific Layer 4 destination port operators (`eq 80`, `eq 443`, `eq 20-21`, `eq 22`). Tested web browsing, secure management sessions, and file transfers to prove that HTTP/HTTPS traffic to the web server and dedicated SSH to the management host succeed, while FTP transfers and ICMP diagnostic pings are actively suppressed.
+  * <details>
+    <summary>Click to view Cisco IOS Verification Proof</summary>
+
+    ```text
+    R_Branch# show ip access-lists PERIMETER_FILTER
+    Extended IP access list PERIMETER_FILTER
+        10 permit tcp 172.16.1.0 0.0.0.255 host 10.0.0.10 eq www (84 matches)
+        20 permit tcp 172.16.1.0 0.0.0.255 host 10.0.0.10 eq 443 (52 matches)
+        30 deny tcp 172.16.1.0 0.0.0.255 host 10.0.0.20 eq ftp (24 matches)
+        40 deny tcp 172.16.1.0 0.0.0.255 host 10.0.0.20 eq ftp-data (0 matches)
+        50 permit tcp host 172.16.1.10 host 10.0.0.30 eq 22 (16 matches)
+        60 deny tcp 172.16.1.0 0.0.0.255 host 10.0.0.30 eq 22 (9 matches)
+        70 deny icmp 172.16.1.0 0.0.0.255 10.0.0.0 0.0.0.255 (32 matches)
+        80 permit ip any any (340 matches)
+
+    R_Branch# show ip interface gigabitEthernet 0/1 | include access list
+      Inbound  access list is PERIMETER_FILTER
+      Outbound access list is not set
+    ```
+    </details>
