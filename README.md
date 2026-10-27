@@ -725,4 +725,70 @@ Welcome! This repository documents my practical learning journey as I learn netw
     ```
     </details>
 
-```
+---
+
+### Part 13: IPv6 Addressing, Auto-Configuration, & Static Routing
+
+* **[Lab 41: Dual-Stack IPv6 Global Unicast & Modified EUI-64 Deployment](./Part-13-IPv6-Addressing-Auto-Configuration-and-Static-Routing/lab-41-ipv6-gua-eui64-dual-stack.pkt)**
+  * **What I did:** Activated global IPv6 routing (`ipv6 unicast-routing`) across a dual-stack enterprise edge topology. Configured static Global Unicast Addresses (GUA) alongside dynamic Modified EUI-64 interface generation, mathematically splitting the 48-bit physical MAC address, inserting the `FFFE` delimiter, and inverting the 7th universal/local bit to form a compliant 64-bit Interface ID.
+  * **The Validation:** Verified that the derived EUI-64 Interface ID matches manual calculations against the physical MAC address, and confirmed that automatic Link-Local addresses (`FE80::/10`) initialize alongside configured GUAs across all dual-stack interfaces.
+  * <details>
+    <summary>Click to view Cisco IOS Verification Proof</summary>
+
+    ```text
+    R_Branch# show interfaces gigabitEthernet 0/0 | include Hardware
+      Hardware is CN Gigabit Ethernet, address is 0001.c7a2.b101 (bia 0001.c7a2.b101)
+
+    R_Branch# show ipv6 interface gigabitEthernet 0/0
+    GigabitEthernet0/0 is up, line protocol is up
+      IPv6 is enabled, link-local address is FE80::201:C7FF:FEA2:B101
+      No Virtual link-local address(es):
+      Global unicast address(es):
+        2001:DB8:1:20:201:C7FF:FEA2:B101, subnet is 2001:DB8:1:20::/64 [EUI]
+      Joined group address(es):
+        FF02::1
+        FF02::2
+        FF02::1:FFA2:B101
+    ```
+    </details>
+
+* **[Lab 42: Stateless Address Auto-Configuration (SLAAC) & NDP Operations](./Part-13-IPv6-Addressing-Auto-Configuration-and-Static-Routing/lab-42-ipv6-slaac-ndp-neighbor-discovery.pkt)**
+  * **What I did:** Configured routers to act as default IPv6 gateway beacons, dispatching periodic ICMPv6 Router Advertisements (RA, Type 134) to allow end hosts to dynamically assemble their own /64 Global Unicast Addresses via SLAAC without a stateful DHCPv6 server.
+  * **The Validation:** Monitored Neighbor Discovery Protocol (NDP) packet flows in Simulation Mode to observe Router Solicitations (RS, Type 133), Neighbor Solicitations (NS, Type 135) for Duplicate Address Detection (DAD), and inspected the IPv6 neighbor cache (`show ipv6 neighbor`) to verify Layer 2 MAC resolution using Solicited-Node multicast targets.
+  * <details>
+    <summary>Click to view Cisco IOS Verification Proof</summary>
+
+    ```text
+    R_Core# show ipv6 neighbor
+    IPv6 Address                              Age Link-layer Addr State Interface
+    2001:DB8:ACAD:1:250:56FF:FE85:8501          2 0050.5685.8501  REACH Gi0/0
+    FE80::250:56FF:FE85:8501                    2 0050.5685.8501  REACH Gi0/0
+
+    PC-1> ipconfig
+    IP Address......................: 0.0.0.0
+    IPv6 Address....................: 2001:DB8:ACAD:1:260:3EFF:FE11:A2B1/64
+    Default Gateway.................: FE80::201:C7FF:FE11:2233
+    ```
+    </details>
+
+* **[Lab 43: IPv6 Static Routing Taxonomy & Floating Backup Routes](./Part-13-IPv6-Addressing-Auto-Configuration-and-Static-Routing/lab-43-ipv6-static-routing-floating-backup.pkt)**
+  * **What I did:** Built multi-hop static IPv6 forwarding paths across a three-router mesh, implementing Fully Specified Static Routes (pairing outbound local exit interface with the next-hop IPv6 address) alongside a Floating Static Route configured with an Administrative Distance of 130 over a secondary circuit.
+  * **The Validation:** Audited the IPv6 Routing Information Base (`show ipv6 route static`) to verify the priority hierarchy, then simulated a primary transit link failure to confirm the backup path floats into the active table to preserve cross-site reachability.
+  * <details>
+    <summary>Click to view Cisco IOS Verification Proof</summary>
+
+    ```text
+    R_SiteA# show ipv6 route static
+    IPv6 Routing Table - 7 entries
+    Codes: C - Connected, L - Local, S - Static, U - Per-user Static route
+    S   2001:DB8:B::/64 [1/0]
+         via 2001:DB8:12::2, GigabitEthernet0/1
+
+    -- Simulating Primary Uplink Drop (GigabitEthernet0/1 shutdown) --
+    %LINK-5-CHANGED: Interface GigabitEthernet0/1, changed state to administratively down
+
+    R_SiteA# show ipv6 route static
+    S   2001:DB8:B::/64 [130/0]
+         via 2001:DB8:13::2
+    ```
+    </details>
